@@ -85,10 +85,15 @@ input[type="button"]:hover {
 @media screen and (max-width: 1080px) {
     body {
         background-image: url(/assets/images/FundoFGVMobile.jpg);
+        overflow-y: hidden; 
     }
 
     .img-container img {
         width: 200px;
+    }
+
+    .bottom-button-container {
+        bottom: 100px;
     }
 
     input[type="button"] {

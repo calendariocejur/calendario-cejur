@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário PQ</title>
+    <link rel="stylesheet" href="/assets/css/pqstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="/assets/images/FavIconCejur.ico" type="image/x-icon">
+
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="esquerda">
+            <div class="calendario">
+                <div class="mes">
+                    <i class="fa fa-angle-left ant"></i>
+                    <div class="data"></div>
+                    <i class="fa fa-angle-right prox"></i>
+                </div>
+                <div class="semanas">
+                    <div>Dom</div>
+                    <div>Seg</div>
+                    <div>Ter</div>
+                    <div>Qua</div>
+                    <div>Qui</div>
+                    <div>Sex</div>
+                    <div>Sab</div>
+                </div>
+                <div class="dias">
+                    <!-- Aqui serão inseridos dinamicamente os dias -->
+                </div>
+                <div class="irpara-hoje">
+                    <div class="irpara">
+                        <input type="text" placeholder="mm/aaaa" class="data-input">
+                        <button class="pesquisar-btn">Pesquisar</button>
+                    </div>
+                    <button class="hoje-btn">Hoje</button>
+                </div>
+            </div>
+        </div>
+        <div class="direita">
+            <div class="dia-hoje">
+                <div class="dia-evento"></div>
+                <div class="data-evento"></div>
+            </div>
+            <div class="eventos">
+                <!-- Aqui serão inseridos dinamicamente os eventos -->
+            </div>
+            <div class="add-wrapper-evento">
+                <div class="add-titulo-evento">
+                    <div class="titulo">Adicionar Evento</div>
+                    <i class="fas fa-times fechar"></i>
+                </div>
+                <div class="add-corpo-evento">
+                    <div class="add-input-evento">
+                        <input type="text" placeholder="Nome do evento" class="nome-evento">
+                    </div>
+                    <div class="add-input-evento">
+                        <input type="text" placeholder="Horário de início" class="inicio-evento">
+                    </div>
+                    <div class="add-input-evento">
+                        <input type="text" placeholder="Horário final" class="fim-evento">
+                    </div>
+                    <div class="add-input-evento">
+                        <select class="categoria-evento">
+                            <option value="atividades-pq">Atividades PQ</option>
+                            <option value="celulas">Células</option>
+                            <option value="projetos">Projetos</option>
+                            <option value="comercial">Comercial</option>
+                            <option value="adm-fin">Adm-Fin</option>
+                            <option value="rh">RH</option>
+                            <option value="marketing">Marketing</option>
+                        </select>
+                    </div>                        
+                </div>
+                <div class="add-evento-rodape">
+                    <button class="add-evento-btn">Adicionar Evento</button>
+                </div>
+            </div>
+        </div>
+        <div class="botoes">
+            <button class="add-evento">
+                <i class="fas fa-plus"></i>
+            </button>
+            <a href="/index.html">
+                <button class="voltar">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </button>
+            </a>
+        </div>
+    </div>
+    <div id="confirm-dialog" class="confirm-dialog">
+        <div class="confirm-dialog-content">
+            <h3>Tem certeza que deseja apagar o evento?</h3>
+            <div class="confirm-dialog-buttons">
+                <button id="confirm-yes" class="confirm-yes">Sim</button>
+                <button id="confirm-no" class="confirm-no">Não</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/assets/js/ccscript.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js"></script>
+</body>
+</html>

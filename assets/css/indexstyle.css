@@ -18,6 +18,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     position: relative;
     overflow-x: hidden;
 }
@@ -47,8 +48,8 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    position: absolute;
-    bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 input[type="button"] {
@@ -85,7 +86,6 @@ input[type="button"]:hover {
 @media screen and (max-width: 1080px) {
     body {
         background-image: url(/assets/images/FundoFGVMobile.jpg);
-        overflow-y: hidden; 
     }
 
     .img-container img {
@@ -97,7 +97,7 @@ input[type="button"]:hover {
     }
 
     input[type="button"] {
-        width: 200px;
+        width: 350px;
         height: 50px;
         font-weight: bold;
         cursor: pointer;

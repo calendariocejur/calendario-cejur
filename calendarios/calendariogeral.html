@@ -47,18 +47,23 @@
                 <div class="termometro-info">
                     <span class="valor-meta"></span>
                 </div>
+                <div class="termometro-select">
+                    <select id="select-termometro">
+                        <option value="financeiro">Meta Financeira</option>
+                        <option value="acao">Meta Ação Colaborativa</option>
+                        <option value="membros">Meta Membros que Executam</option>
+                    </select>
+                </div>
                 <div class="termometro-form">
                     <label for="meta">Meta (R$): </label>
                     <input type="number" id="meta" placeholder="Defina a meta">
-                    <button class="salvar-meta-btn">Salvar Meta</button>
-                
+                    <button class="salvar-meta-btn" id="salvar-meta-btn">Salvar Meta</button>
+            
                     <label for="progresso">Progresso (R$): </label>
                     <input type="number" id="progresso" placeholder="Valor atual">
-                    <button class="atualizar-progresso-btn">Atualizar Progresso</button>
+                    <button class="atualizar-progresso-btn" id="atualizar-progresso-btn">Atualizar Progresso</button>
                 </div>
-                
             </div>
-            
         </div>
         
         <div class="direita">

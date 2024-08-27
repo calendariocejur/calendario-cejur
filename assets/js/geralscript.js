@@ -37,7 +37,8 @@ const calendario = document.querySelector(".calendario"),
     atualizarProgressoBtn = document.querySelector(".atualizar-progresso-btn"),
     valorMetaDisplay = document.querySelector(".valor-meta"),
     termometroProgresso = document.querySelector(".termometro-progresso"),
-    termometroForm = document.querySelector(".termometro-form")
+    termometroForm = document.querySelector(".termometro-form"),
+    selectTermometro = document.getElementById("select-termometro");
 
 let hoje = new Date();
 let diaAtivo;
@@ -603,6 +604,19 @@ confirmDialog.addEventListener("click", (event) => {
 });
 
 
+// Função para atualizar a barra de progresso do termômetro
+function atualizarTermometro() {
+    const termometroProgresso = document.querySelector(".termometro-progresso");
+    if (meta > 0) {
+        const progressoPercentual = (progresso / meta) * 100;
+        termometroProgresso.style.width = `${progressoPercentual}%`;
+        termometroProgresso.textContent = `R$ ${progresso.toFixed(2)}`;
+    } else {
+        termometroProgresso.style.width = "0%";
+        termometroProgresso.textContent = "";
+    }
+}
+
 // Função para salvar a meta no Firestore
 salvarMetaBtn.addEventListener("click", function(e) {
     e.preventDefault(); // Evita que o formulário seja enviado
@@ -613,7 +627,7 @@ salvarMetaBtn.addEventListener("click", function(e) {
         atualizarTermometro();
 
         // Salva a meta no Firestore na coleção "configuracoes"
-        bd.collection("configuracoes").doc("metaProgresso").set({
+        bd.collection("configuracoes").doc(`metaProgresso_${tipoAtual}`).set({
             meta: meta,
             progresso: progresso // Inicialmente o progresso pode ser zero ou o valor atual
         }).then(() => {
@@ -635,7 +649,7 @@ atualizarProgressoBtn.addEventListener("click", function(e) {
         atualizarTermometro();
 
         // Atualiza o progresso no Firestore na coleção "configuracoes"
-        bd.collection("configuracoes").doc("metaProgresso").update({
+        bd.collection("configuracoes").doc(`metaProgresso_${tipoAtual}`).update({
             progresso: progresso
         }).then(() => {
             console.log("Progresso atualizado com sucesso!");
@@ -647,21 +661,15 @@ atualizarProgressoBtn.addEventListener("click", function(e) {
     }
 });
 
-// Função para atualizar a barra de progresso do termômetro
-function atualizarTermometro() {
-    if (meta > 0) {
-        const progressoPercentual = (progresso / meta) * 100;
-        termometroProgresso.style.width = `${progressoPercentual}%`;
-        termometroProgresso.textContent = `R$ ${progresso.toFixed(2)}`;
-    } else {
-        termometroProgresso.style.width = "0%";
-        termometroProgresso.textContent = "";
-    }
-}
+// Altera o tipo de termômetro com base na seleção
+selectTermometro.addEventListener("change", function() {
+    tipoAtual = this.value; // Atualiza o tipo atual
+    carregarDadosTermometro(); // Carrega os dados do termômetro selecionado
+});
 
-// Carrega a meta e o progresso ao inicializar a página
-document.addEventListener("DOMContentLoaded", function() {
-    bd.collection("configuracoes").doc("metaProgresso").get().then((doc) => {
+// Função para carregar os dados do termômetro selecionado
+function carregarDadosTermometro() {
+    bd.collection("configuracoes").doc(`metaProgresso_${tipoAtual}`).get().then((doc) => {
         if (doc.exists) {
             meta = doc.data().meta;
             progresso = doc.data().progresso;
@@ -674,4 +682,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }).catch((error) => {
         console.error("Erro ao buscar a meta: ", error);
     });
+}
+
+// Carrega a meta e o progresso ao inicializar a página
+document.addEventListener("DOMContentLoaded", function() {
+    carregarDadosTermometro(); // Carrega os dados do termômetro padrão
 });

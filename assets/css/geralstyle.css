@@ -261,6 +261,19 @@ body{
     color: var(--cor2);
 }
 
+.termometro-select {
+    margin: 10px 0px 10px 0px;
+}
+
+.termometro-select select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--cor2);
+    width: 100%;
+    font-size: 1rem;
+}
+
+
 .termometro-form {
     display: flex;
     flex-direction: column;

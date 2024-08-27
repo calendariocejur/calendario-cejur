@@ -46,6 +46,7 @@ let mes = hoje.getMonth();
 let ano = hoje.getFullYear();
 let meta = 0;
 let progresso = 0;
+let tipoAtual = 'financeiro'; 
 
 const meses = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",

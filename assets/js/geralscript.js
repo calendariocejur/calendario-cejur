@@ -309,11 +309,8 @@ function atualizarEventos(data) {
             eventoObj.eventos.forEach((evento, index) => {
                 let estiloFundo;
                 switch(evento.categoria) {
-                    case 'atividades-pq':
+                    case 'rd':
                         estiloFundo = '#1f78b4'; // Azul
-                        break;
-                    case 'celulas':
-                        estiloFundo = '#6a0dad'; // Roxo
                         break;
                     case 'projetos':
                         estiloFundo = '#00008b'; // Azul Escuro

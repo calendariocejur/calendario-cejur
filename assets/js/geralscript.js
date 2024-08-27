@@ -36,7 +36,8 @@ const calendario = document.querySelector(".calendario"),
     salvarMetaBtn = document.querySelector(".salvar-meta-btn"),
     atualizarProgressoBtn = document.querySelector(".atualizar-progresso-btn"),
     valorMetaDisplay = document.querySelector(".valor-meta"),
-    termometroProgresso = document.querySelector(".termometro-progresso");
+    termometroProgresso = document.querySelector(".termometro-progresso"),
+    termometroForm = document.querySelector(".termometro-form")
 
 let hoje = new Date();
 let diaAtivo;
@@ -63,14 +64,19 @@ function verificarPapelUsuario() {
     if (userRole === 'editor') {
         botaoAdcRodape.style.display = 'block'; // Mostrar botão de adicionar evento
         eventosContainer.classList.add('editable'); // Adicionar classe para estilo de edição
+        termometroForm.style.display = 'flex'; // Mostrar formulário do termômetro
     } else {
         botaoAdcRodape.style.display = 'none'; // Esconder botão de adicionar evento
         eventosContainer.classList.remove('editable'); // Remover classe de estilo de edição
+        termometroForm.style.display = 'none'; // Esconder formulário do termômetro
     }
 }
 
 // Chamar a função para verificar o papel do usuário ao carregar a página
 verificarPapelUsuario();
+
+// Verificar se o usuário é editor ao carregar a página
+document.addEventListener('DOMContentLoaded', verificarPapelUsuario);
 
 
 // Função para iniciar o calendário
@@ -669,8 +675,3 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Erro ao buscar a meta: ", error);
     });
 });
-
-
-
-// Verificar se o usuário é editor ao carregar a página
-document.addEventListener('DOMContentLoaded', verificarPapelUsuario);

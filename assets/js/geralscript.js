@@ -611,7 +611,11 @@ function atualizarTermometro() {
     if (meta > 0) {
         const progressoPercentual = (progresso / meta) * 100;
         termometroProgresso.style.width = `${progressoPercentual}%`;
-        termometroProgresso.textContent = `R$ ${progresso.toFixed(2)}`;
+
+        // Verifica se a meta é financeira para exibir o valor em R$
+        termometroProgresso.textContent = (tipoAtual === 'financeiro') 
+            ? `R$ ${progresso.toFixed(2)}` 
+            : progresso.toFixed(0); // Apenas número
     } else {
         termometroProgresso.style.width = "0%";
         termometroProgresso.textContent = "";
@@ -624,7 +628,11 @@ salvarMetaBtn.addEventListener("click", function(e) {
 
     meta = parseFloat(metaInput.value); // Obtém o valor da meta
     if (!isNaN(meta) && meta > 0) {
-        valorMetaDisplay.textContent = `Meta: R$ ${meta.toFixed(2)}`;
+        // Exibe a meta de acordo com o tipo
+        valorMetaDisplay.textContent = (tipoAtual === 'financeiro') 
+            ? `Meta: R$ ${meta.toFixed(2)}` 
+            : `Meta: ${meta.toFixed(0)}`; // Apenas número
+        
         atualizarTermometro();
 
         // Salva a meta no Firestore na coleção "configuracoes"
@@ -675,7 +683,11 @@ function carregarDadosTermometro() {
             meta = doc.data().meta;
             progresso = doc.data().progresso;
 
-            valorMetaDisplay.textContent = `Meta: R$ ${meta.toFixed(2)}`;
+            // Atualiza a exibição da meta
+            valorMetaDisplay.textContent = (tipoAtual === 'financeiro') 
+                ? `Meta: R$ ${meta.toFixed(2)}` 
+                : `Meta: ${meta.toFixed(0)}`; // Apenas número
+            
             atualizarTermometro();
         } else {
             console.log("Nenhuma meta encontrada!");
